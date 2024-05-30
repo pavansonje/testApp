@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { QUESTIONS } from "./questions";
+import Questions from "./components/Questions";
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +52,7 @@ class App extends Component {
     event.preventDefault();
     const fd = new FormData(event.target);
     const formEntries = Object.fromEntries(fd.entries());
+    console.log(formEntries);
     const score =
       (100 *
         Object.entries(formEntries).filter((item) => item[1] === "yes")
@@ -97,24 +98,7 @@ class App extends Component {
           ) : (
             <section>
               <form onSubmit={this.handleSubmit.bind(this)}>
-                {Object.entries(QUESTIONS).map(([key, item]) => (
-                  <article key={key} className="grid-container">
-                    <div className="grid-item">{item}</div>
-                    <div className="grid-item">
-                      <label>
-                        <input type="radio" value="yes" name={key} required />
-                        Yes
-                      </label>
-                      <label>
-                        <input type="radio" value="no" name={key} required />
-                        No
-                      </label>
-                    </div>
-                  </article>
-                ))}
-                <div>
-                  <button>Submit</button>
-                </div>
+                <Questions />
               </form>
             </section>
           )}
